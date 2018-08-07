@@ -7,10 +7,15 @@ from bs4 import BeautifulSoup
 import json
 from pprint import pprint
 
+global key_list
+key_list = []
+
 def print_keys(my_dict):
+    global key_list
     if type(my_dict) is dict:
         for k in my_dict.keys():
-            print(k)
+            #print(k)
+            key_list.append(k)
             print_keys(my_dict[k])
     if type(my_dict) is list:
         for l in my_dict:
@@ -21,21 +26,6 @@ fname = '__data_export.json'
 with open(os.path.join(fpath, fname)) as f:
     data = json.load(f)
 
-#pprint(data)
-
-#outfile = 'clinic_parsed.txt'
-#with open(os.path.join(fpath, outfile), 'w+') as out:
-    #for key, val in data.items():
-        #out.write(str(key) + '\t' + str(val))
-
-# only write out the output if the trial is currently visible
-
-# create a separate object with only the current trials visible
-print(type(data))
-# each key in the dictionary is NCT###..., representing a clinical trial.
-print(data['NCT03590054'])
-print(type(data['NCT03590054']))
-print(data['NCT03590054']['is_visible'])
 
 current_trials = set()
 past_trials = set()
@@ -53,3 +43,5 @@ print('past trials: ' + str(len(past_trials)))
 # consider all the keys we have for each trial...
 key_data = data['NCT03590054']
 print_keys(key_data)
+print(key_list)
+
