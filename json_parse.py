@@ -22,6 +22,7 @@ def print_keys(my_dict):
             print_keys(l)
 
 fpath = os.path.join(os.path.sep, 'Users', 'student', 'GitHub', 'nlp')
+outpath = os.path.join(os.path.sep, "Users", 'student', 'nlp', 'clinical_classify')
 fname = '__data_export.json'
 with open(os.path.join(fpath, fname)) as f:
     data = json.load(f)
@@ -41,7 +42,15 @@ print('current trials: ' + str(len(current_trials)))
 print('past trials: ' + str(len(past_trials)))
 
 # consider all the keys we have for each trial...
-key_data = data['NCT03590054']
-print_keys(key_data)
-print(key_list)
+key_set = set()
+for key, val in data.items():
+    print_keys(val)
+    key_set.update(key_list)
+key_print = list(key_set)
+key_print.sort()
+
+key_outfile = 'clinical_items.txt'
+key_set = set(key_list)
+with open(os.path.join(outpath, key_outfile), 'w+') as out:
+    out.write('\n'.join(str(x) for x in key_print))
 
