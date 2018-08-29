@@ -9,7 +9,7 @@ fpath_out = os.path.join(fpath, 'columns')
 data = []
 with open(os.path.join(fpath, fname), 'r') as f:
     for line in f:
-       tmp = line.strip().split('|')
+       tmp = line.strip().split('~~')
        data.append(tmp)
 
 headers= ['key']
