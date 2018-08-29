@@ -38,7 +38,6 @@ def add_items(fields, data):
                 tmp.append('-')
                 unused.add(item[0])
         filtered.append(tmp)
-    print(unused)
     return filtered
 
 fpath = os.path.join(os.path.sep, 'Users', 'student', 'nlp', 'clinical_classify')
